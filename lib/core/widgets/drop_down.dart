@@ -1,7 +1,7 @@
 
 
 import 'package:flutter/material.dart';
-import 'package:pokedex_app/features/pokemon/presentation/widgets/form_field2.dart';
+import 'package:pokedex_app/core/widgets/form_field2.dart';
 
 class Select<T> extends FormField2 {
   Select({

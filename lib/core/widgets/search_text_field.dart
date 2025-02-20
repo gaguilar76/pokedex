@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'package:pokedex_app/core/utils/strings_app.dart';
-import 'package:pokedex_app/features/pokemon/presentation/widgets/form_field2.dart';
+import 'package:pokedex_app/core/widgets/form_field2.dart';
 
 
 class SearchTextField extends FormField2 {

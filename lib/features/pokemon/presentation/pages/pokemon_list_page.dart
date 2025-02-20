@@ -6,8 +6,8 @@ import 'package:pokedex_app/core/utils/images_app.dart';
 import 'package:pokedex_app/core/utils/strings_app.dart';
 import 'package:pokedex_app/features/pokemon/presentation/controllers/pokemon_controller.dart';
 import 'package:pokedex_app/features/pokemon/presentation/controllers/theme_controller.dart';
-import 'package:pokedex_app/features/pokemon/presentation/widgets/drop_down.dart';
-import 'package:pokedex_app/features/pokemon/presentation/widgets/search_text_field.dart';
+import 'package:pokedex_app/core/widgets/drop_down.dart';
+import 'package:pokedex_app/core/widgets/search_text_field.dart';
 
 
 class PokemonListPage extends StatefulWidget {
