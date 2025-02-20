@@ -25,6 +25,11 @@
     JVM:          17.0.7 (Oracle Corporation 17.0.7+8-LTS-224)
     OS:           Windows 10 10.0 amd64
 
+# Screenshots
+    ![Light Mode](assets/screenshots/LightTheme.jpg)
+
+    ![Dark Mode](assets/screenshots/DarkTheme.jpg)    
+
 
 # Features
 ✅ List of Pokémon with pagination
