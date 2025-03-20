@@ -1,9 +1,9 @@
 
 
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+
 import 'package:pokedex_app/core/error/failures.dart';
 import 'package:pokedex_app/features/pokemon/data/models/pokemon_model.dart';
 import 'package:pokedex_app/features/pokemon/data/models/pokemon_type_model.dart';
@@ -15,19 +15,6 @@ abstract class PokemonLocalDataSource {
 
 
 class HivePokemonLocalDataSourceImpl implements PokemonLocalDataSource {
-
-  @override
-  Future<List<PokemonModel>> filterPokemonsByType(String typeName) async {
-    try {
-      var box = await Hive.openBox('pokemons_cache');
-      return box.values.map((p) => PokemonModel.fromJsonLocal(p)).where((pokemon) => pokemon.types.any((type) => type.type.name.toLowerCase().contains(typeName.toLowerCase()))).toList();
-      
-    } catch (error) {
-      debugPrint(error.toString()); 
-      throw LocalFailure();
-    }
-
-  }
 
  
   @override

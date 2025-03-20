@@ -8,7 +8,6 @@ import 'package:pokedex_app/features/pokemon/domain/entities/pokemon_type.dart';
 import 'package:pokedex_app/features/pokemon/domain/use_cases/get_pokemons_type_use_case.dart';
 import 'package:pokedex_app/features/pokemon/domain/use_cases/get_pokemons_use_case.dart';
 import 'package:pokedex_app/features/pokemon/presentation/bindigns/pokemon_binding.dart';
-import 'package:pokedex_app/features/pokemon/presentation/pages/pokemon_detail_page.dart';
 import 'package:pokedex_app/features/pokemon/presentation/pages/pokemon_info_page.dart';
 import 'package:pokedex_app/main.dart';
 
@@ -89,7 +88,12 @@ class PokemonController extends GetxController {
               return ((item.name
                       .trim()
                       .toLowerCase()
-                      .contains(valueSearch.trim().toLowerCase())));
+                      .contains(valueSearch.trim().toLowerCase()) ||
+                      item.id.toString()
+                      .trim()
+                      .toLowerCase()
+                      .contains(valueSearch.trim().toLowerCase())
+                      ));
             }).toList();     
             listPokemon.value = List.from(result);
       }       

@@ -6,20 +6,29 @@ Pokédex App is an app developed in Flutter using GetX for state management, wit
 
 ## Screenshots
 
-![Light Mode](assets/screenshots/light.png)
+![Home](assets/screenshots/home.png)
 
 
-![Dark Mode](assets/screenshots/dark.png)
+![Detail](assets/screenshots/detail.png)
+
+
+![Detail 2](assets/screenshots/detail2.png)
+
+
+![Detail 3](assets/screenshots/detail3.png)
+
+
+![Detail 4](assets/screenshots/detail4.png)
 
 ## Features
 
 - List of Pokémon with pagination
-- Search for Pokémon by name
-- Filtered by Pokémon types
+- Search for Pokémon by number or name
+- Sorting Pokémon by number or name
 - Caching with Hive for offline mode
-- Support for light and dark mode
-- Smooth animations with GetX
-- Drag-and-drop implementation in Pokémon list to reorder
+- SOLID design pattern
+- Error handling and asynchronous responses
+- Use Getx as a state manager in your application
 
 
 ## Tech Stack
@@ -93,6 +102,7 @@ OpenJDK 64-Bit Server VM Temurin-17.0.7+7 (build 17.0.7+7, mixed mode, sharing)
             |   |-- bindings
             |   |-- controllers
             |   |-- pages
+            |   |-- routes
 
 ## API Reference
 
@@ -107,12 +117,6 @@ OpenJDK 64-Bit Server VM Temurin-17.0.7+7 (build 17.0.7+7, mixed mode, sharing)
 ```
 
 ## Theme Customization
-
-#### Enable Light/Dark Mode with GetX:
-
-```http
-  Get.changeTheme(Get.isDarkMode ? ThemeData.light() : ThemeData.dark());  
-```
 
 ## Author
 

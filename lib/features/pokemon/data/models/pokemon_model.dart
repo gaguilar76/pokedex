@@ -1,4 +1,3 @@
-
 import 'package:pokedex_app/features/pokemon/domain/entities/pokemon.dart';
 
 class PokemonModel extends Pokemon {
@@ -74,6 +73,7 @@ class PokemonModel extends Pokemon {
       'height': height,
       'weight': weight,
       'types': types.map((e) => TypeModel.fromEntity(e).toJson()).toList(),
+      'moves': moves.map((e) => MoveModel.fromEntity(e).toJson()).toList(),
     };
   }
 

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class FormField2 extends StatefulWidget {
   final Function(FormField2State)? builder;
 
-  FormField2({
+  const FormField2({
     Key? key,
     this.builder,
   }) : super(key: key);
