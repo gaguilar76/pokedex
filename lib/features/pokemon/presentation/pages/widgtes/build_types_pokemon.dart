@@ -22,7 +22,7 @@ class BuildTypesPokemon extends StatelessWidget {
             Padding(
               padding: EdgeInsets.only(left: 5, right: 5),
               child: Container(
-                padding: EdgeInsets.all(10),
+                padding: EdgeInsets.only(left: 10, right: 10, top: 5, bottom: 5),
                 decoration: BoxDecoration(
                   color: UtilsTheme.generateRandomColor(),
                   borderRadius: BorderRadius.circular(20),
@@ -31,7 +31,7 @@ class BuildTypesPokemon extends StatelessWidget {
                 style: TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
-                  fontFamily: 'Poppins',
+                  fontSize: 10,
                  ),
                 ),
               ),

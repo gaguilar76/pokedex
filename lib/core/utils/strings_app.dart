@@ -12,6 +12,8 @@ String get weightStr => 'Weight';
 String get straightenStr => 'Straighten';
 String get movesStr => 'Moves';
 String get loadingStr => 'Loading...';
+String get aboutStr => 'About';
+String get baseStatStr => 'Base Stats';
 
 
 

@@ -188,7 +188,7 @@ showSortDialog(BuildContext context, PokemonController ctl) {
         children: [
           Positioned(
             top: 80,
-            right: 20,
+            right: 5,
             child: StatefulBuilder(
               builder: (context, setState) {
                 return AlertDialog(

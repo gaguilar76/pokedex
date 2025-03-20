@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 import 'package:pokedex_app/core/utils/images_app.dart';
+import 'package:pokedex_app/core/utils/strings_app.dart';
 import 'package:pokedex_app/core/utils/utils_app.dart';
 import 'package:pokedex_app/core/utils/utils_theme.dart';
 import 'package:pokedex_app/features/pokemon/domain/entities/pokemon.dart';
@@ -17,6 +18,7 @@ class PokemonInfoPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenSize = MediaQuery.of(context).size;
     return Scaffold(
       body: Container(
         color: UtilsTheme.getPokemonColor(pokemon.color),
@@ -40,43 +42,46 @@ class PokemonInfoPage extends StatelessWidget {
               bottom: 5,
               left: 5,
               right: 5,
-              top: 340,
+              top: screenSize.height * 0.40,
               child: Container(
                 decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: const BorderRadius.all(Radius.circular(20)),
                 ),
-                child: Column(
-                  children: [
-                    SizedBox(height: 60),
-                    Expanded(
-                      flex: 2,
-                      child: BuildTypesPokemon(pokemon: pokemon)
-                    ),
-                    Expanded(
-                      flex: 5,
-                      child: BuildAboutPokemon(pokemon: pokemon)
-                    ),
-                    Expanded(
-                      flex: 3,
-                      child: Center(
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text(pokemon.description,
-                            style: TextStyle(
-                                fontWeight: FontWeight.w400,
-                                fontSize: 14,
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      SizedBox(height: 80),
+                      BuildTypesPokemon(pokemon: pokemon),
+                      SizedBox(height: 10),
+                      Text(aboutStr,
+                        style: TextStyle(
+                          fontWeight: FontWeight.w700,
+                          fontSize: 18,
+                          color: UtilsTheme.getPokemonColor(pokemon.color),
+                        ),
+                      ),
+                      SizedBox(height: 10),
+                      AboutPokemon(pokemon: pokemon),
+                      SizedBox(height: 10),
+                      SizedBox(
+                        width: double.infinity,
+                        child: Center(
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(pokemon.description,
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: 14,
+                              ),
                             ),
                           ),
                         ),
-                      )
-                    ),
-                    Expanded(
-                      flex: 7,
-                      child: SingleChildScrollView(
-                        child: Column(
+                      ),
+                      SizedBox(height: 10),
+                      Column(
                           children: [
-                            Text('Base Stats',
+                            Text(baseStatStr,
                               style: TextStyle(
                                 fontWeight: FontWeight.w700,
                                 fontSize: 18,
@@ -87,10 +92,11 @@ class PokemonInfoPage extends StatelessWidget {
                                BuildLineStat(stat: pokemon.stats[i], pokemonColor: pokemon.color), 
                           ],
                         ),
-                      )
-                    ),
-                  ],
-                )
+                      SizedBox(height: 10),  
+                    ],
+                  ),
+                ),
+
               ),
             ),
             Positioned(
@@ -128,9 +134,10 @@ class PokemonInfoPage extends StatelessWidget {
             Positioned(
               left: 5,
               right: 5,
-              top: 220,
-              height: 200,
-              child: Container(
+              top: screenSize.height * 0.30,
+              child: SizedBox(
+                height: screenSize.height  * 0.22,
+                width: screenSize.width  * 0.20,
                 child: buildPokemonImage(),
               ),
             ),            
@@ -151,11 +158,12 @@ class PokemonInfoPage extends StatelessWidget {
                         height: 20,
                         width: 20,
                       ),
-              fit: BoxFit.fitHeight
+              fit: BoxFit.contain
             );
   }
 
 }
+
 
 
 
