@@ -9,8 +9,6 @@ import 'package:pokedex_app/features/pokemon/data/models/pokemon_model.dart';
 import 'package:pokedex_app/features/pokemon/data/models/pokemon_type_model.dart';
 
 abstract class PokemonLocalDataSource {
-  Future<List<PokemonModel>> searchPokemonsByName(String name);
-  Future<List<PokemonModel>> filterPokemonsByType(String typeName);
   Future<List<PokemonModel>> getPokemonsLocal();
   Future<List<PokemonTypeModel>> getPokemonsTypeLocal();
 }
@@ -22,7 +20,7 @@ class HivePokemonLocalDataSourceImpl implements PokemonLocalDataSource {
   Future<List<PokemonModel>> filterPokemonsByType(String typeName) async {
     try {
       var box = await Hive.openBox('pokemons_cache');
-      return box.values.map((p) => PokemonModel.fromJson(p)).where((pokemon) => pokemon.types.any((type) => type.type.name.toLowerCase().contains(typeName.toLowerCase()))).toList();
+      return box.values.map((p) => PokemonModel.fromJsonLocal(p)).where((pokemon) => pokemon.types.any((type) => type.type.name.toLowerCase().contains(typeName.toLowerCase()))).toList();
       
     } catch (error) {
       debugPrint(error.toString()); 
@@ -31,23 +29,12 @@ class HivePokemonLocalDataSourceImpl implements PokemonLocalDataSource {
 
   }
 
-  @override
-  Future<List<PokemonModel>> searchPokemonsByName(String name) async {
-    try {
-      var box = await Hive.openBox('pokemons_cache');
-      return box.values.map((p) => PokemonModel.fromJson(p)).where((pokemon) => pokemon.name.toLowerCase().contains(name.toLowerCase())).toList();
-      
-    } catch (error) {
-      debugPrint(error.toString()); 
-      throw LocalFailure();
-    }
-  }
-  
+ 
   @override
   Future<List<PokemonModel>> getPokemonsLocal() async {
     try {
       var box = await Hive.openBox('pokemons_cache');
-      final allPokemons = box.values.map((p) => PokemonModel.fromJson(p)).toList();
+      final allPokemons = box.values.map((p) => PokemonModel.fromJsonLocal(p)).toList();
       allPokemons.sort((a, b) => a.id.compareTo(b.id));
       return allPokemons;
     } catch (error) {

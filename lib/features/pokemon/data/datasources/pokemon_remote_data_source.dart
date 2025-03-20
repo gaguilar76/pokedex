@@ -26,8 +26,9 @@ class PokemonRemoteDataSourceImpl implements PokemonRemoteDataSource {
 
   Future<PokemonModel> getPokemonByName(String name) async {
     try {
-      Response response = await dio.get('${API.baseUrl}/pokemon/$name').timeout(const Duration(seconds: 10));
-      return PokemonModel.fromJson(response.data);
+      Response pokemonResponse = await dio.get('${API.baseUrl}/pokemon/$name').timeout(const Duration(seconds: 10));
+      Response speciesResponse = await dio.get('${API.baseUrl}/pokemon-species/$name').timeout(const Duration(seconds: 10));
+      return PokemonModel.fromJson(pokemonResponse.data, speciesResponse.data);
     } catch (error) {
       debugPrint(error.toString());
       throw ServerFailure();
@@ -47,7 +48,7 @@ class PokemonRemoteDataSourceImpl implements PokemonRemoteDataSource {
         if (pokemonsResponse.results.isNotEmpty) {
           for (var element in pokemonsResponse.results) {
             if (box.containsKey(element.name)) {
-              PokemonModel pokemon = PokemonModel.fromJson(box.get(element.name));
+              PokemonModel pokemon = PokemonModel.fromJsonLocal(box.get(element.name));
               pokemons.add(pokemon);
             } else {
               PokemonModel pokemon = await getPokemonByName(element.name);

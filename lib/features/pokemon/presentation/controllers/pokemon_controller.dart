@@ -2,11 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'package:pokedex_app/core/utils/strings_app.dart';
+import 'package:pokedex_app/core/utils/utils_services.dart';
 import 'package:pokedex_app/features/pokemon/domain/entities/pokemon.dart';
 import 'package:pokedex_app/features/pokemon/domain/entities/pokemon_type.dart';
-import 'package:pokedex_app/features/pokemon/domain/use_cases/pokemon_use_cases.dart';
+import 'package:pokedex_app/features/pokemon/domain/use_cases/get_pokemons_type_use_case.dart';
+import 'package:pokedex_app/features/pokemon/domain/use_cases/get_pokemons_use_case.dart';
 import 'package:pokedex_app/features/pokemon/presentation/bindigns/pokemon_binding.dart';
 import 'package:pokedex_app/features/pokemon/presentation/pages/pokemon_detail_page.dart';
+import 'package:pokedex_app/features/pokemon/presentation/pages/pokemon_info_page.dart';
 import 'package:pokedex_app/main.dart';
 
 class PokemonController extends GetxController {
@@ -14,12 +17,16 @@ class PokemonController extends GetxController {
   final errorLoaded = false.obs;
   final listPokemon = <Pokemon>[].obs;
   final listPokemonType = <PokemonType>[].obs;
+  final selectedOption = '0'.obs;
   List<Pokemon> listPokemonAux = [];
   int offset = 0;
-  final int limit = 20; // Tamaño de página
-  final ScrollController scrollController = ScrollController();
+  final int limit = 30; // Tamaño de página
   final searchController = TextEditingController();
-  final PokemonUseCases useCases = Get.put(PokemonUseCases(repository: pokemonRepositoryImpl));
+  final GetPokemonsUseCase getPokemonsUseCase = 
+        GetPokemonsUseCase(repository: pokemonRepositoryImpl);  
+  final GetPokemonsTypeUseCase getPokemonsTypeUseCase = 
+        GetPokemonsTypeUseCase(repository: pokemonRepositoryImpl);  
+
   final typeSelected = ''.obs;
 
   @override
@@ -35,7 +42,7 @@ class PokemonController extends GetxController {
     try {
       typeSelected.value = '';
       searchController.text = '';
-      var result = await useCases.getPokemons(offset, limit);
+      var result = await getPokemonsUseCase(offset, limit);
       result.fold(
           (failure) {
             errorLoaded.value = true;
@@ -48,7 +55,7 @@ class PokemonController extends GetxController {
           },
         );
 
-      final result2 = await useCases.getPokemonsType();
+      final result2 = await getPokemonsTypeUseCase();
       result2.fold(
           (failure) {
             errorLoaded.value = true;
@@ -131,11 +138,27 @@ class PokemonController extends GetxController {
 
   showDetailPokemon(Pokemon pokemon) {
     Get.to(
-      () => PokemonDetailPage(pokemon: pokemon),
+      () => PokemonInfoPage(pokemon: pokemon),
       binding: PokemonBinding(),
       transition: Transition.fadeIn,
       duration: Duration(milliseconds: 600),
     );
+  }
+
+  setSortOptions(BuildContext context, String? value) {
+    listPokemonAux.sort((a, b) {
+      if (value == "0") {
+        return a.id.compareTo(b.id);
+      } else if (value == "1") {
+        return a.name.compareTo(b.name);
+      }
+      return 0;
+    });
+    listPokemon.value = List.from(listPokemonAux);
+    listPokemon.refresh(); 
+    selectedOption.value = value!;
+    Navigator.pop(context);
+    UtilsServices.unfocusKeyboard(context);
   }
 
 }

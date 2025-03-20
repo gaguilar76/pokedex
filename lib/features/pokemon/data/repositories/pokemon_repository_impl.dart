@@ -18,16 +18,6 @@ class PokemonRepositoryImpl implements PokemonsRepository {
   );
 
   @override
-  Future<Either<Failure, List<Pokemon>>> filterPokemonsByType(String typeName) async {
-    try {
-      final List<Pokemon> resp = await pokemonLocalDataSource.filterPokemonsByType(typeName);
-      return Right(resp);
-    } on LocalFailure {
-      return left(LocalFailure());
-    }
-  }
-
-  @override
   Future<Either<Failure, List<Pokemon>>> getPokemons([int offset=0, int limit=20]) async {
     try {
       final List<Pokemon> resp = await pokemonRemoteDataSource.getPokemons(offset, limit);
@@ -37,16 +27,6 @@ class PokemonRepositoryImpl implements PokemonsRepository {
     }
   }
 
-  @override
-  Future<Either<Failure, List<Pokemon>>> searchPokemonsByName(String name) async {
-    try {
-      final List<Pokemon> resp = await pokemonLocalDataSource.searchPokemonsByName(name);
-      return Right(resp);
-    } on LocalFailure {
-      return left(LocalFailure());
-    }
-  }
-  
   @override
   Future<Either<Failure, List<Pokemon>>> getPokemonsLocal() async {
     try {

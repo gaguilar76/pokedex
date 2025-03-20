@@ -53,7 +53,7 @@ class SearchTextField extends FormField2 {
                   disabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(15.0),
                   ),
-                  suffixIcon: clearIcon 
+                  prefix: clearIcon 
                     ? Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       mainAxisSize: MainAxisSize.min,
@@ -65,6 +65,7 @@ class SearchTextField extends FormField2 {
                           child: Icon(
                             Icons.clear,
                             size: 20,
+                            color: Colors.black,
                           ),
                         ),
                         SizedBox(width: 10.0,),
@@ -72,6 +73,7 @@ class SearchTextField extends FormField2 {
                           child: Icon(
                             Icons.search,
                             size: 30,
+                            color: Color.fromRGBO(220, 10, 45, 1),
                           ),
                         ),
                         SizedBox(width: 10.0,),
@@ -81,6 +83,7 @@ class SearchTextField extends FormField2 {
                       child: Icon(
                         Icons.search,
                         size: 30,
+                        color: Color.fromRGBO(220, 10, 45, 1),
                       ),
                     ),
                   ),
