@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 final lightTheme = ThemeData(
   brightness: Brightness.light,
   primaryColor: Colors.blueAccent,
-  scaffoldBackgroundColor: Color(0xFFF5F5F5), // Gris muy claro
+  scaffoldBackgroundColor: Color.fromRGBO(220, 10, 45, 1), // Gris muy claro
 
   colorScheme: ColorScheme.light(
     primary: Colors.blueAccent,
@@ -15,14 +15,14 @@ final lightTheme = ThemeData(
   ),
 
   appBarTheme: AppBarTheme(
-    backgroundColor: Colors.blueAccent,
-    titleTextStyle: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
+    backgroundColor: Color.fromRGBO(220, 10, 45, 1),
+    titleTextStyle: TextStyle(color: const Color(0xFFFFFFFF), fontSize: 20, fontWeight: FontWeight.bold),
     iconTheme: IconThemeData(color: Colors.white),
   ),
 
   cardTheme: CardTheme(
     color: Colors.white,
-    shadowColor: Colors.grey.withOpacity(0.3),
+    shadowColor: Colors.grey.withValues(alpha: 0.3),
     elevation: 5,
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(12),
@@ -35,7 +35,7 @@ final lightTheme = ThemeData(
   ),
 
   textTheme: TextTheme(
-    displayLarge: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.black),
+    displayLarge: TextStyle(fontFamily: 'Poppins', fontSize: 24, fontWeight: FontWeight.bold, color: Colors.black),
     bodyLarge: TextStyle(fontSize: 16, color: Colors.black87),
   ),
   

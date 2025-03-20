@@ -2,22 +2,28 @@ class Pokemon {
   final int id;  
   final String name;
   final String imageUrl;
+  final String color;
+  final String description;
   final List<Ability> abilities;
   final List<Stat> stats;
   final int baseExperience;
   final int height;
   final int weight;
   final List<Type> types;
+  final List<Move> moves;
 
   Pokemon({ required this.id, 
             required this.name, 
             required this.imageUrl, 
+            required this.color, 
+            required this.description, 
             required this.abilities, 
             required this.stats, 
             required this.baseExperience, 
             required this.height, 
             required this.weight, 
-            required this.types });
+            required this.types,
+            required this.moves });
 }
 
 class Ability {
@@ -54,3 +60,9 @@ class Result {
 
 }
 
+class Move {
+  final String name;
+
+  Move({required this.name});
+
+}

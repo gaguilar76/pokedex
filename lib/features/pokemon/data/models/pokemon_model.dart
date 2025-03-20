@@ -4,27 +4,60 @@ import 'package:pokedex_app/features/pokemon/domain/entities/pokemon.dart';
 class PokemonModel extends Pokemon {
   PokemonModel({ required super.id, 
                  required super.name, 
-                 required super.imageUrl, 
+                 required super.imageUrl,
+                 required super.color,
+                 required super.description,
                  required super.abilities, 
                  required super.stats, 
                  required super.baseExperience, 
                  required super.height, 
                  required super.weight, 
-                 required super.types});
+                 required super.types,
+                 required super.moves});
 
-  factory PokemonModel.fromJson(json) {
+  factory PokemonModel.fromJson(json, jsonSpecies) {
+    String description = '';
+    final descriptions = jsonSpecies['flavor_text_entries'];
+    for (var entry in descriptions) {
+      if (entry['language']['name'] == 'en') {
+        description = entry['flavor_text'].replaceAll('\n', ' ').replaceAll('\f', ' ');
+        break;
+      }
+    }    
+
     return PokemonModel(
       id: json['id'], 
       name: json['name'], 
       imageUrl: json['sprites']['front_default'],  
+      color: jsonSpecies['color']['name'],  
+      description: description,
       abilities: json["abilities"] == null ? [] : List<AbilityModel>.from(json['abilities'].map((x) => AbilityModel.fromJson(x))),
       stats: json["stats"] == null ? [] : List<StatModel>.from(json["stats"].map((x) => StatModel.fromJson(x))),
       baseExperience: json['base_experience'], 
       height: json["height"], 
       weight: json["weight"], 
-      types: json["types"] == null ? [] : List<TypeModel>.from(json["types"].map((x) => TypeModel.fromJson(x)))
+      types: json["types"] == null ? [] : List<TypeModel>.from(json["types"].map((x) => TypeModel.fromJson(x))),
+      moves: json["moves"] == null ? [] : List<MoveModel>.from(json["moves"].map((x) => MoveModel.fromJson(x))).take(2).toList(),
       );
   }
+
+  factory PokemonModel.fromJsonLocal(json) {
+    return PokemonModel(
+      id: json['id'], 
+      name: json['name'], 
+      imageUrl: json['sprites']['front_default'],  
+      color: json['color'],
+      description: json['description'],  
+      abilities: json["abilities"] == null ? [] : List<AbilityModel>.from(json['abilities'].map((x) => AbilityModel.fromJson(x))),
+      stats: json["stats"] == null ? [] : List<StatModel>.from(json["stats"].map((x) => StatModel.fromJson(x))),
+      baseExperience: json['base_experience'], 
+      height: json["height"], 
+      weight: json["weight"], 
+      types: json["types"] == null ? [] : List<TypeModel>.from(json["types"].map((x) => TypeModel.fromJson(x))),
+      moves: json["moves"] == null ? [] : List<MoveModel>.from(json["moves"].map((x) => MoveModel.fromJson(x)))
+      );
+  }
+
 
   Map<String, dynamic> toJson() {
     return {
@@ -33,6 +66,8 @@ class PokemonModel extends Pokemon {
       'sprites': {
         'front_default' : imageUrl
       },
+      'color': color,
+      'description': description,
       'abilities': abilities.map((e) => AbilityModel.fromEntity(e).toJson()).toList(),
       'stats': stats.map((e) => StatModel.fromEntity(e).toJson()).toList(),
       'base_experience': baseExperience,
@@ -46,12 +81,15 @@ class PokemonModel extends Pokemon {
     return PokemonModel(  id: pokemon.id, 
                           name: pokemon.name, 
                           imageUrl: pokemon.imageUrl, 
+                          color: pokemon.color,
+                          description: pokemon.description,
                           abilities: pokemon.abilities, 
                           stats: pokemon.stats, 
                           baseExperience: pokemon.baseExperience, 
                           height: pokemon.height, 
                           weight: pokemon.weight, 
-                          types: pokemon.types);
+                          types: pokemon.types,
+                          moves: pokemon.moves);
   }
 }
 
@@ -147,5 +185,28 @@ class TypeModel extends Type {
   factory TypeModel.fromEntity(Type type) {
     return TypeModel( slot: type.slot, 
                       type: type.type);
+  }
+}
+
+
+class MoveModel extends Move {
+  MoveModel({required super.name});
+
+  factory MoveModel.fromJson(json) { 
+      return MoveModel (
+        name: json['move']['name']
+      );
+  }
+
+  Map<String, dynamic> toJson() {
+      return {
+      'move': {
+          'name' : name
+        },
+      };
+  }    
+
+  factory MoveModel.fromEntity(Move type) {
+    return MoveModel( name: type.name);
   }
 }
