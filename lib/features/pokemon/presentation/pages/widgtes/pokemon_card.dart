@@ -13,7 +13,81 @@ class PokemonCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
+    return Container(
+      decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(15),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withValues(alpha: 0.5),
+                  blurRadius: 5,
+                  spreadRadius: 2,
+                  offset: const Offset(2, 2),
+                ),
+              ],
+          ),
+      child: Stack(
+        children: [
+          Positioned(
+            top: 5,
+            right: 10,
+            child: Text(
+                  "#${pokemon.id}",
+                  style: TextStyle(
+                    color: Colors.grey[600],
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+          ),
+          Positioned(
+              top: 65,
+              right: 0,
+              left: 0,
+              bottom: 0,
+              child: Container(
+                  decoration: BoxDecoration(
+                    color: const Color.fromRGBO(239, 239, 239, 1),
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.only(bottom: 5),
+                    child: Align(
+                      alignment: Alignment.bottomCenter,
+                      child: Text(
+                        UtilsApp.capitalizeEachWord(pokemon.name),
+                        style: TextStyle(
+                          fontFamily: 'Poppins',
+                          fontWeight: FontWeight.bold,
+                          fontSize: 12,
+                          color: Colors.black87,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+          ),
+          Positioned(
+          top: 10,
+          left: 15,
+          child: CachedNetworkImage(
+                        //height: 80,
+                        //width: 80,
+                        imageUrl: pokemon.imageUrl,
+                        placeholder: (context, url) =>
+                            CircularProgressIndicator(),
+                        errorWidget: (context, url, error) =>
+                            SvgPicture.asset(
+                                  pokeballSvg,
+                                  height: 20,
+                                  width: 20,
+                                ),
+                        fit: BoxFit.contain),
+        ),
+
+        ],
+      ),
+    );
+    /*Stack(
       children: [
         Container(
           decoration: BoxDecoration(
@@ -84,6 +158,6 @@ class PokemonCard extends StatelessWidget {
                         fit: BoxFit.contain),
         ),
       ],
-    );
+    );*/
   }
 }

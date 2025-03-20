@@ -61,9 +61,8 @@ class _PokemonHomePageState extends State<PokemonHomePage> {
                         width: 20,
                       ),
                       Text(
-                        'Pokédex',
+                        pokedex,
                         style: TextStyle(
-                          fontFamily: 'Poppins',
                           fontWeight: FontWeight.w700,
                           fontSize: 24,
                           color: Colors.white,
@@ -128,13 +127,15 @@ class _PokemonHomePageState extends State<PokemonHomePage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            'Loading...',
+                            loadingStr,
                             style: TextStyle(
                               color: Colors.white,
                             ),
                           ),
                           SizedBox(height: 20),
-                          CircularProgressIndicator(),
+                          CircularProgressIndicator(
+                            backgroundColor: Colors.white,
+                          ),
                         ],
                       )),
                     )

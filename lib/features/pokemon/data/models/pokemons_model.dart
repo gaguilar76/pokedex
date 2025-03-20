@@ -1,5 +1,4 @@
 
-
 import 'package:pokedex_app/features/pokemon/data/models/pokemon_model.dart';
 import 'package:pokedex_app/features/pokemon/domain/entities/pokemons.dart';
 
