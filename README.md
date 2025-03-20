@@ -1,7 +1,7 @@
 
 # Pokedex App
 
-Pokédex App is an app developed in Flutter using GetX for state management, with features like search, paging, caching, and a dark mode.
+The Pokédex app is an app that retrives a list of Pokémon and their details. It´s build in Flutter using Getx for state management, with features like searching, sorting, pagination and caching.   
 
 
 ## Screenshots
